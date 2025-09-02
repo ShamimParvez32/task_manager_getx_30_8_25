@@ -54,6 +54,12 @@ class UpdateProfileController extends GetxController {
       requestBody['photo'] = base64Photo;
     }
 
+    /*if (_pickedImage != null) {
+      List<int> imageBytes = await _pickedImage!.readAsBytes();
+      requestBody['photo'] = base64Encode(imageBytes);
+    }*/
+
+
     if (password.isNotEmpty) {
       requestBody['password'] = password;
     }
@@ -64,6 +70,10 @@ class UpdateProfileController extends GetxController {
     );
 
     if (response.isSuccess) {
+
+      // Method == 1 update local auth from response
+
+      /*
       Map<String, dynamic>? responseData = response.responseBody;
       if (responseData!['status'] == 'success') {
         final updatedData = responseData['data'];
@@ -85,7 +95,27 @@ class UpdateProfileController extends GetxController {
 
           await authController.setUserData(token, updateUser);
         }
+      }*/
+
+      // Method == 2 updating  data  directly
+
+      /*final AuthController _authController = Get.find<AuthController>();
+      _authController.userModel?.email = email;
+      _authController.userModel?.firstName = firstName;
+      _authController.userModel?.lastName = lastName;
+      _authController.userModel?.photo = base64Photo;
+      isSuccess = true;
+      _errorMessage = null;
+      _authController.update();*/
+
+
+      // Method == 3 updating  data  by response to auth updateUserData function;
+
+      final AuthController _authController = Get.find<AuthController>();
+      if (requestBody['photo'] == null) {
+        requestBody['photo'] = _authController.userModel?.photo;
       }
+      Get.find<AuthController>().updateUserData(UserModel.fromJson(requestBody));
 
       isSuccess = true;
       _errorMessage = null;

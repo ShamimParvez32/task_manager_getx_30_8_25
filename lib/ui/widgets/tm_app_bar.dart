@@ -13,7 +13,6 @@ final bool fromUpdateProfile;
   @override
   Widget build(BuildContext context) {
    final  textTheme=Theme.of(context).textTheme;
-   final authController =AuthController.to;
     return AppBar(
       backgroundColor: AppColors.themeColor,
       title: GetBuilder<AuthController>(

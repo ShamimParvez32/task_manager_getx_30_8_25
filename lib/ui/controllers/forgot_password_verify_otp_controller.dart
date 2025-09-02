@@ -13,13 +13,13 @@ class ForgotPasswordVerifyOtpController extends GetxController{
   String? get errorMessage=> _errorMessage;
 
 
-  Future<bool> forgotPasswordVerifyOtp (String pinCode,) async {
+  Future<bool> forgotPasswordVerifyOtp (String email, String pinCode,) async {
      bool isSuccess=false;
     _forgotPasswordOtpInProgress = true;
       update();
 
      final NetworkResponse response = await NetworkCaller.getRequest(
-       url: Urls.recoveryOtpUrl(pinCode),
+       url: Urls.recoveryOtpUrl(email, pinCode),
      );
      final AuthController _authController =Get.find<AuthController>();
 

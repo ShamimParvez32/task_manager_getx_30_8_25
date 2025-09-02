@@ -61,6 +61,15 @@ class AuthController extends GetxController{
     return false;
   }
 
+   Future<void> updateUserData(UserModel model) async {
+     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     await sharedPreferences.setString(_userDataKey, jsonEncode(model.toJson()));
+     userModel = model;
+     update();
+   }
+
+
+
   Future<void> clearUserData()async{
    SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
     sharedPreferences.clear();

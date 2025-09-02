@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:task_manager_getx_30_8_25/ui/controllers/auth_controller.dart';
 import 'package:task_manager_getx_30_8_25/ui/controllers/forgot_password_verify_otp_controller.dart';
 import 'package:task_manager_getx_30_8_25/ui/screens/reset_password_screen.dart';
 import 'package:task_manager_getx_30_8_25/ui/screens/sign_in_screen.dart';
@@ -139,8 +140,9 @@ class _ForgotPasswordVerifyOtpScreenState
     }
   }
 
+  final AuthController _authController=Get.find<AuthController>();
   Future<void> _verifyOtp() async {
-    final bool isSuccess= await _forgotPasswordVerifyOtpController.forgotPasswordVerifyOtp(_pinCodeTEController.text.trim());
+    final bool isSuccess= await _forgotPasswordVerifyOtpController.forgotPasswordVerifyOtp(_authController.getEmail,_pinCodeTEController.text.trim());
 
     if (isSuccess) {
       showSnakeBarMessage(context, 'Otp verification successful');
