@@ -136,7 +136,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     if (isSuccess) {
 
       showSnakeBarMessage(context, 'password reset successful');
-      Navigator.pushNamedAndRemoveUntil(context, SignInScreen.name, (predicate)=>false);
+      Get.offAllNamed(SignInScreen.name);
     }
       else{
         showSnakeBarMessage(context, _resetPasswordController.errorMessage!);
